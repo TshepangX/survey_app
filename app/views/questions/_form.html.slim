@@ -1,0 +1,84 @@
+-if params[:question_type].blank?
+  =form_with url: survey_questions_path  do |form|
+    div 
+      = form.label :type
+    div 
+      = form.select :type, [["multiple_choice", "multiple_choice"], ["open ended", "open_ended"], ["multi part", "multi_part"]]
+    div 
+      =form.submit "Next"
+      
+-elsif params[:question_type] == "multiple_choice"
+  = form_with url: survey_questions_path do |form|
+    div 
+      = form.hidden_field :question_type, value: 'multiple_choice'
+    div 
+      = form.label :title
+    div 
+      = form.text_area :title, required: true
+    div 
+      = form.label :option1
+    div 
+      = form.text_field :option1, required: true
+    br 
+    div 
+      = form.label :option2
+    div 
+      = form.text_field :option2, required: true
+    br 
+    div 
+      = form.label :option3
+    div 
+      = form.text_field :option3, required: true
+    br 
+    div 
+      = form.label :option4
+    div 
+      = form.text_field :option4, required: true
+    
+    div 
+      = form.submit
+
+-elsif params[:question_type]  ==  "open_ended"
+  =form_with url: survey_questions_path  do |form|
+    div 
+      = form.hidden_field :question_type, value: 'open_ended'
+    div 
+      = form.label :title
+    div 
+      = form.text_area :title, required: true
+    div 
+      = form.submit
+
+-else params[:question_type] == "multi_part"
+  = form_with url: survey_questions_path do |form|
+    div 
+      = form.hidden_field :question_type, value: 'multi_part'
+    div 
+      = form.label :title
+    div 
+      = form.text_area :title, required: true
+    br 
+    div 
+      = form.label :option1
+    div 
+      = form.text_field :option1, required: true
+    br 
+    div 
+      = form.label :option2
+    div 
+      = form.text_field :option2, required: true
+    br 
+    div 
+      = form.label :option3
+    div 
+      = form.text_field :option3, required: true
+    br 
+    div 
+      = form.label :option4
+    div 
+      = form.text_field :option4, required: true
+    
+    div 
+      = form.submit
+
+  

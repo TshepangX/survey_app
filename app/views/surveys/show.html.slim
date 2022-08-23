@@ -1,0 +1,52 @@
+-if user_signed_in? && @survey.user == current_user
+  h3 
+    = link_to "Home", root_path
+  -if @question.present?
+    h1 = @survey.title
+    br 
+    div 
+      = @question.title 
+    br
+      br
+    = render 'answers/form', { answer: @question.answers.new(), survey: @survey}
+
+    li 
+      = link_to "Edit Question", edit_survey_question_path(@survey, @question, question_type: @question.question_type)
+  
+    li  
+      = link_to "Delete Question", survey_question_path(@survey, @question), method: :delete, data: {confirm: "Are you sure you want to delete these questions?"}
+    br
+    div 
+      = link_to "Add Question", new_survey_question_path(@survey)
+    div 
+      = link_to "Edit survey", edit_survey_path(@survey)
+    div  
+        = link_to "Delete Survey", survey_path, method: :delete, data: {confirm: "Are you sure you want to delete this survey?"}
+    
+  - else 
+    h1 = h1 = @survey.title
+    p This survey has no questions 
+
+    div 
+      = link_to "Add Question", new_survey_question_path(@survey)
+    div 
+      = link_to "Edit survey", edit_survey_path(@survey)
+    div  
+        = link_to "Delete Survey", survey_path, method: :delete, data: {confirm: "Are you sure you want to delete this survey?"}
+
+-else 
+  h3 
+    = link_to "Home", root_path
+  - if @question.present?
+    h1 = @survey.title
+    br 
+    div 
+      = @question.title 
+    br
+      br
+    = render 'answers/form', { answer: @question.answers.new(), survey: @survey}
+
+  - else 
+    h1 
+      = @survey.title
+    p This survey has no questions

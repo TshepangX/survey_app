@@ -1,0 +1,109 @@
+h3
+  = link_to "Home", root_path
+
+h1
+  = @survey.title
+
+-@survey.questions.each do |question|
+  = question.question_type
+  div 
+    = question.title 
+  -if question.question_type == "multiple_choice"
+    br
+      | number of people that answered this question ; 
+
+      = question.answers.count.to_f 
+    ul 
+      li 
+        -if question.option1 != nil && question.answers.count != 0
+          = question.option1 
+           | : 
+          = ((question.answers.where(option: question.option1).count.to_f / question.answers.count.to_f) * 100).round(2) 
+          | % chose this option
+        -else
+          = question.option1
+
+      li 
+        -if question.option2 != nil && question.answers.count != 0
+          = question.option2 
+           | : 
+          = ((question.answers.where(option: question.option2).count.to_f / question.answers.count.to_f) * 100).round(2)
+          | % chose this option
+        -else
+          = question.option2
+
+      li 
+        -if question.option3 != nil && question.answers.count != 0
+          = question.option3 
+           | : 
+          = ((question.answers.where(option: question.option3).count.to_f / question.answers.count.to_f) * 100).round(2)
+          | % chose this option
+        -else
+          = question.option3 
+
+      li 
+        -if question.option4 != nil && question.answers.count != 0
+          = question.option4 
+           | : 
+          = ((question.answers.where(option: question.option4).count.to_f / question.answers.count.to_f) * 100).round(2) 
+          | % chose this option
+        -else
+          = question.option4
+
+          
+  -elsif question.question_type == "multi_part"
+    br
+    | number of people that answered this question ; 
+
+    = question.answers.count.to_f 
+           
+    ul
+      li
+        -if question.option1 != "0" && question.answers.count != 0
+          = question.option1 
+          |  - 
+          
+          = ((question.answers.where(option1: question.option1).count.to_f / question.answers.count.to_f) * 100).round(2) 
+          | % of them chose this option
+
+        -else 
+          =question.option1
+
+      li
+        -if question.option2 != "0" && question.answers.count != 0
+          = question.option2 
+          |  - 
+ 
+          = ((question.answers.where(option2: question.option2).count.to_f / question.answers.count.to_f) * 100).round(2)
+          | % of them chose this option
+
+        -else 
+          =question.option2
+
+      li
+        -if question.option3 != "0" && question.answers.count != 0
+          = question.option3 
+          |  - 
+
+          = ((question.answers.where(option3: question.option3).count.to_f / question.answers.count.to_f) * 100).round(2) 
+          | % of them chose this option
+
+        -else 
+          =question.option3
+
+      li
+        -if question.option4 != "0" && question.answers.count != 0
+          = question.option4 
+          |  - 
+
+          = ((question.answers.where(option4: question.option4).count.to_f / question.answers.count.to_f) * 100).round(2)
+          | % of them chose this option
+
+        -else 
+          =question.option4
+    
+  -else
+    ul 
+      -question.answers.each do |answer|
+        = answer.open_ended
+      

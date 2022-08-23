@@ -1,0 +1,86 @@
+
+-if answer.question.question_type == 'multiple_choice'
+  = form_with model: answer, html:{multipart: false} do |form|
+    div 
+      = form.hidden_field :question_id, value: answer.question_id 
+    div 
+      = form.hidden_field :survey_id, value: survey.id 
+    div 
+      = form.hidden_field :question_type, value: 'multiple_choice'
+    div 
+      = form.label "#{answer.question.option1}"
+    div 
+      = form.radio_button :option, answer.question.option1
+    br
+    div 
+      = form.label "#{answer.question.option2}"
+    div 
+      = form.radio_button :option, answer.question.option2 
+    br 
+    div 
+      = form.label "#{answer.question.option3}"
+    div 
+      = form.radio_button :option , answer.question.option3
+    br
+    div 
+      = form.label "#{answer.question.option4}"
+    div 
+      = form.radio_button :option , answer.question.option4
+    div 
+      - if answer.question != survey.questions.last
+        = form.submit 'Next'
+      - else 
+        = form.submit 
+
+-elsif answer.question.question_type == 'open_ended'
+  = form_with model: answer do |form|
+    div 
+      = form.hidden_field :question_id, value: answer.question_id 
+    div 
+      = form.hidden_field :survey_id, value: survey.id 
+    div 
+      = form.hidden_field :question_type, value: 'open_ended'
+    div 
+      = form.label :answer
+    div 
+      = form.text_field :open_ended, required: true
+    div 
+      - if answer.question != survey.questions.last
+        = form.submit 'Next'
+      - else 
+        = form.submit 
+
+-else answer.question.question_type == 'multi_part'
+  = form_with model: answer, html:{multipart: true} do |form|
+    div 
+      = form.hidden_field :question_id, value: answer.question_id 
+    div 
+      = form.hidden_field :survey_id, value: survey.id 
+    div 
+      = form.hidden_field :question_type, value: 'multi_part'
+    div 
+      = form.label "#{answer.question.option1}"
+    div 
+      = form.check_box(:option1, {}, "#{answer.question.option1}")
+    br
+    div 
+      = form.label "#{answer.question.option2}"
+    div 
+      = form.check_box(:option2, {}, "#{answer.question.option2}")
+    br 
+    div 
+      = form.label "#{answer.question.option3}"
+    div 
+      = form.check_box(:option3, {}, "#{answer.question.option3}")
+    br 
+    div 
+      = form.label "#{answer.question.option4}"
+    div 
+      = form.check_box(:option4, {}, "#{answer.question.option4}")
+    div 
+      - if answer.question != survey.questions.last
+        = form.submit 'Next'
+      - else 
+        = form.submit 
+
+

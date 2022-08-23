@@ -1,0 +1,72 @@
+h3 
+  = link_to "Home", root_path
+h1 Edit Question 
+
+-if @question.question_type == 'multiple_choice'
+  =form_with model: [@question.survey, @question] do |form|
+    div 
+      = form.label :title
+    div 
+      = form.text_area :title
+    br 
+    div 
+      = form.label :option1
+    div 
+      = form.text_field :option1
+    br 
+    div 
+      = form.label :option2
+    div 
+      = form.text_field :option2
+    br 
+    div 
+      = form.label :option3
+    div 
+      = form.text_field :option3
+    br 
+    div 
+      = form.label :option4
+    div 
+      = form.text_field :option4 
+
+    div 
+      = form.submit
+
+-elsif @question.question_type == 'open_ended'
+  =form_with model: [@question.survey, @question] do |form|
+    div 
+      = form.label :title
+    div 
+      = form.text_area :title
+    div 
+      = form.submit
+
+-else @question.question_type == 'multi_part'
+  =form_with model: [@question.survey, @question] do |form|
+    div 
+      = form.label :title
+    div 
+      = form.text_area :title
+    br 
+    div 
+      = form.label :option1
+    div 
+      = form.text_field :option1
+    br 
+    div 
+      = form.label :option2
+    div 
+      = form.text_field :option2
+    br 
+    div 
+      = form.label :option3
+    div 
+      = form.text_field :option3
+    br 
+    div 
+      = form.label :option4
+    div 
+      = form.text_field :option4 
+
+    div 
+      = form.submit
