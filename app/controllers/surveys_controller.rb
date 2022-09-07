@@ -1,4 +1,5 @@
 class SurveysController < ApplicationController
+  #include SurveyReportsGenerator
   skip_before_action :authenticate_user!, only: :index
   skip_before_action :authenticate_user!, only: :show
  
@@ -7,6 +8,7 @@ class SurveysController < ApplicationController
   end
 
   def show 
+    
     @survey = Survey.find(params[:id])
     begin
       @question = @survey.questions.find(params[:question_id])
